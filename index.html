@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        .container{
+            width: 1024px;
+            margin: 0 auto;
+        }
+        .slideShow{
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+            width: 1024px;
+        }
+        .slideShow .imgs{
+            position: absolute;left: 0;
+            width: 3072px;
+            transition: left 1s;
+        }
+        .slideShow .imgs a{
+            display: block;
+            float: left;
+        }
+        .slideShow .imgs a img{
+            display: block;
+            float: left;
+            width: 1024px;
+        }
+        .slideShow button{
+            position: absolute;
+            top: 200px;
+            width: 100px;
+            height: 100px;
+
+            background-color: rgba(255,255,255,0.5);
+        }
+        .slideShow .imgs+button{
+            left: 0;
+        }
+        .slideShow button+button{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="slideShow">
+            <div class="imgs">
+                <a href="#"><img src="img/1.jpg"></a>
+                <a href="#"><img src="img/2.jpg"></a>
+                <a href="#"><img src="img/3.jpg"></a>
+            </div>
+            <button><</button>
+            <button>></button>
+        </div>
+        <div class="slideShow">
+            <div class="imgs">
+                <a href="#"><img src="img/1.jpg"></a>
+                <a href="#"><img src="img/2.jpg"></a>
+                <a href="#"><img src="img/3.jpg"></a>
+            </div>
+            <button><</button>
+            <button>></button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    window.addEventListener("load",function(){
+        var slideShowDivs = document.getElementsByClassName("slideShow");
+        for (var i = slideShowDivs.length - 1; i >= 0; i--) {
+            slideShow(slideShowDivs[i]);
+        }
+        function slideShow(element){
+            var imgs = element.getElementsByClassName("imgs")[0];
+            var button = element.getElementsByTagName("button");
+            var left = 0;
+            button[0].addEventListener("click",function(){
+                left += 1024;
+                if (left > 0) {left = - 1024 * 2;}
+                imgs.style.left = left+'px';
+            });
+            button[1].addEventListener("click",function(){
+                left -= 1024;
+                if (left < - 1024 * 2) {left = 0;}
+                imgs.style.left = left+'px';
+            });
+        }
+    });
+</script>
+</html>
